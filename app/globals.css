@@ -1,0 +1,77 @@
+:root {
+  --primary: #228be6;
+  --secondary: #868e96;
+  --success: #40c057;
+  --danger: #fa5252;
+  --background: #f8f9fa;
+  --foreground: #212529;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1rem;
+}
+
+button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.voice-canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.transcript-area,
+.memo-area {
+  width: 80%;
+  max-width: 600px;
+  margin: 16px 0;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 8px;
+}
+
+.memo-list {
+  margin-top: 16px;
+}
+
+.memo-item {
+  background-color: #f0f0f0;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}

@@ -1,0 +1,52 @@
+.memoArea {
+  flex: 1;
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button.listening {
+  background-color: #dc3545;
+}
+
+.memoInput {
+  width: 100%;
+  height: 150px;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.savedMemos {
+  margin-top: 1rem;
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
+}
+
+.memoItem {
+  background-color: #e9ecef;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
