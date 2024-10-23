@@ -14,7 +14,6 @@ const MemoArea: React.FC<MemoAreaProps> = ({ memo, onUpdateMemo, onBlur }) => {
       <div className="memo-header">
         <h2>メモ</h2>
       </div>
-      <p>メモしましょう。音声認識を元に定期的にAIがメモを清書してくれます。</p>
       <textarea
         value={memo}
         onChange={(e) => onUpdateMemo(e.target.value)}
