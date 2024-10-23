@@ -29,7 +29,7 @@ const VoiceCanvas: React.FC = () => {
   // メモをuseStateで管理
   const [memo, setMemo] = useState("");
 
-  const { proposedMinutes, isGenerating } = useAIMinutesGeneration(
+  const { proposedMinutes, isGeneratingMinutes } = useAIMinutesGeneration(
     apiKey,
     minutesGenerationInterval,
     transcript,
@@ -109,7 +109,7 @@ const VoiceCanvas: React.FC = () => {
           <MemoArea
             memo={memo}
             onUpdateMemo={handleMemoChange}
-            onBlur={saveMemoToLocalStorage}
+            onBlur={() => saveMemoToLocalStorage(memo)}
           />
           <TranscriptArea transcript={transcript} />
         </div>
@@ -117,7 +117,7 @@ const VoiceCanvas: React.FC = () => {
           <MinutesProposal
             proposedMinutes={proposedMinutes}
             onAcceptProposal={handleAcceptProposal}
-            isGenerating={isGenerating}
+            isGenerating={isGeneratingMinutes}
           />
         </div>
       </div>
