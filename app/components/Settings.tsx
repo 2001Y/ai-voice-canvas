@@ -4,48 +4,20 @@ import React from "react";
 
 interface SettingsProps {
   apiKey: string;
-  onApiKeyChange: (key: string) => void;
-  memoGenerationInterval: number;
-  onMemoGenerationIntervalChange: (interval: number) => void;
+  onApiKeyChange: (newKey: string) => void;
   minutesGenerationInterval: number;
-  onMinutesGenerationIntervalChange: (interval: number) => void;
+  onMinutesGenerationIntervalChange: (newInterval: number) => void;
 }
 
 const Settings: React.FC<SettingsProps> = ({
   apiKey,
   onApiKeyChange,
-  memoGenerationInterval,
-  onMemoGenerationIntervalChange,
   minutesGenerationInterval,
   onMinutesGenerationIntervalChange,
 }) => {
   return (
     <div className="settings">
       <h3>設定</h3>
-      <label>
-        メモをAI生成する間隔（秒）:
-        <input
-          type="number"
-          value={memoGenerationInterval / 1000}
-          onChange={(e) =>
-            onMemoGenerationIntervalChange(Number(e.target.value) * 1000)
-          }
-          min="5"
-          max="60"
-        />
-      </label>
-      <label>
-        議事録をAI生成する間隔（秒）:
-        <input
-          type="number"
-          value={minutesGenerationInterval / 1000}
-          onChange={(e) =>
-            onMinutesGenerationIntervalChange(Number(e.target.value) * 1000)
-          }
-          min="10"
-          max="300"
-        />
-      </label>
       <label>
         OpenAI APIキー:
         <input
@@ -55,6 +27,18 @@ const Settings: React.FC<SettingsProps> = ({
           placeholder="sk-..."
         />
       </label>
+      <div>
+        <label>
+          議事録をAI生成する間隔（ミリ秒）:
+          <input
+            type="number"
+            value={minutesGenerationInterval}
+            onChange={(e) =>
+              onMinutesGenerationIntervalChange(Number(e.target.value))
+            }
+          />
+        </label>
+      </div>
     </div>
   );
 };
