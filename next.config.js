@@ -1,14 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
+  reactStrictMode: true,
+  transpilePackages: ["react-speech-recognition"],
   webpack: (config, { isServer, dev }) => {
-    config.experiments = {
-      ...config.experiments,
-      topLevelAwait: true,
-    };
+    config.resolve.fallback = { fs: false, net: false, tls: false };
     return config;
+  },
+  experimental: {
+    forceSwcTransforms: true,
   },
 };
 

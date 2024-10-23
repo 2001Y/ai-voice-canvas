@@ -2,50 +2,50 @@
 
 import { useState, useCallback } from "react";
 
-// OpenAI APIの代わりにダミー関数を使用
-const generateDummyMinutes = (memos: string[]): string => {
-  const date = new Date().toLocaleDateString("ja-JP", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+const generateMinutesWithAPI = async (
+  memo: string,
+  apiKey: string
+): Promise<string> => {
+  const response = await fetch("/api/generate-minutes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ memo, apiKey }),
   });
-  const participants = ["山田太郎", "佐藤花子", "鈴木一郎"];
-  const topics = ["プロジェクトの進捗報告", "次期計画の策定", "予算の見直し"];
 
-  return `
-日付: ${date}
-参加者: ${participants.join(", ")}
-
-議題:
-${topics.map((topic, index) => `${index + 1}. ${topic}`).join("\n")}
-
-議事内容:
-${memos.map((memo, index) => `${index + 1}. ${memo}`).join("\n")}
-
-決定事項:
-- プロジェクトAの期限を1週間延長する
-- 次回のミーティングで予算案を再検討する
-
-次回のアクションアイテム:
-- 各部署の進捗レポートを作成する
-- 新規プロジェクトの企画書を準備する
-  `;
+  const data = await response.json();
+  if (response.ok) {
+    return data.minutes;
+  } else {
+    throw new Error(data.error || "Failed to generate minutes");
+  }
 };
 
-export const useAIMinutesGeneration = () => {
+export const useAIMinutesGeneration = (apiKey: string) => {
   const [proposedMinutes, setProposedMinutes] = useState("");
 
-  const generateMinutes = useCallback((memos: string[]) => {
-    if (memos.length === 0) {
-      setProposedMinutes("");
-      return;
-    }
+  const generateMinutes = useCallback(
+    async (memo: string) => {
+      console.log("議事録の生成を試みています..."); // 日本語に変更
+      if (memo.trim() === "" || !apiKey) {
+        console.log("メモが空か、APIキーが欠落しています。"); // 日本語に変更
+        setProposedMinutes("");
+        return;
+      }
 
-    // 実際のAPIコールの代わりにダミー関数を使用
-    const generatedMinutes = generateDummyMinutes(memos);
-    setProposedMinutes(generatedMinutes);
-  }, []);
+      try {
+        console.log("議事録生成のリクエストを送信中..."); // 日本語に変更
+        const generatedMinutes = await generateMinutesWithAPI(memo, apiKey);
+        console.log("議事録が正常に生成されました:", generatedMinutes); // 日本語に変更
+        setProposedMinutes(generatedMinutes);
+      } catch (error) {
+        console.error("議事録の生成中にエラーが発生しました:", error); // 日本語に変更
+        setProposedMinutes("議事録の生成中にエラーが発生しました。");
+      }
+    },
+    [apiKey]
+  );
 
   return { proposedMinutes, generateMinutes };
 };

@@ -1,7 +1,9 @@
 import React from "react";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const VoiceCanvas = dynamic(() => import('./components/VoiceCanvas'), { ssr: false });
+const VoiceCanvas = dynamic(() => import("./components/VoiceCanvas"), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
